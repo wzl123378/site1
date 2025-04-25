@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<body onload="sortbylastname()">
+    <table id="tbl">
+        <!-- 假设这里是表格内容，包含表头和数据行 -->
+    </table>
+    <script>
+        let sortbylastname = function () {
+            const tbl = document.getElementsByTagName('table')[0];
+            const rows = [];
+            // 收集数据行（跳过表头）
+            for (let i = 1; i < tbl.rows.length; i++) {
+                rows.push(tbl.rows[i]);
+            }
+            // 按第一列（first name）排序
+            rows.sort((a, b) => {
+                const nameA = a.cells[0].textContent.toLowerCase();
+                const nameB = b.cells[0].textContent.toLowerCase();
+                if (nameA < nameB) return -1;
+                if (nameA > nameB) return 1;
+                return 0;
+            });
+            // 清空表格原有数据行
+            while (tbl.rows.length > 1) {
+                tbl.deleteRow(1);
+            }
+            // 将排序后的行重新添加到表格
+            rows.forEach(row => tbl.appendChild(row));
+        };
+    </script>
+</body>
+
+</html>

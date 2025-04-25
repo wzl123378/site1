@@ -1,0 +1,17 @@
+let sortbylastname = function () {
+    const tbl = document.getElementsByTagName('table')[0];
+    const rows = Array.from(tbl.rows).slice(1); // 假设第一行为表头，获取数据行
+    rows.sort((a, b) => {
+        const firstNameA = a.cells[0].innerHTML.toLowerCase(); // 假设第一列为名字列
+        const firstNameB = b.cells[0].innerHTML.toLowerCase();
+        if (firstNameA < firstNameB) return -1;
+        if (firstNameA > firstNameB) return 1;
+        return 0;
+    });
+    // 移除表格原有数据行
+    while (tbl.rows.length > 1) {
+        tbl.deleteRow(1);
+    }
+    // 将排序后的行重新添加到表格
+    rows.forEach(row => tbl.appendChild(row));
+};
